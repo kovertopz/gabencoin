@@ -60,6 +60,7 @@ Mac OS X
 
 	sudo port selfupdate
 	sudo port install boost db48 miniupnpc
+        sudo port install qt4-mac
 
 - Execute the following commands in a terminal to get the dependencies using HomeBrew:
 
@@ -72,7 +73,12 @@ Mac OS X
 
         patch -p1 < contrib/homebrew/bitcoin.qt.pro.patch
 
-- Open the gabencoin-qt.pro file in Qt Creator and build as normal (cmd-B)
+- Open the gabencoin-qt.pro file in Qt Creator and build as normal (cmd-B) on the command line:
+
+::
+
+    qmake
+    make
 
 .. _`Qt Mac OS X SDK`: http://qt-project.org/downloads/
 .. _`MacPorts`: http://www.macports.org/install.php

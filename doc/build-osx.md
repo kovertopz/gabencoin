@@ -29,7 +29,7 @@ Notes
 See `doc/readme-qt.rst` for instructions on building Gabencoin-Qt, the
 graphical user interface.
 
-Tested on OS X 10.5 through 10.8 on Intel processors only. PPC is not
+Tested on OS X 10.5 through 10.9 on Intel processors only. PPC is not
 supported because it is big-endian.
 
 All of the commands should be executed in a Terminal application. The
@@ -87,6 +87,52 @@ Installing the dependencies using MacPorts is very straightforward.
 3.  It is a good idea to build and run the unit tests, too:
 
         make -f makefile.osx test
+
+Instructions: MacPorts for OSX 10.9
+-----------------------------------
+
+In OSX 10.9 the default c++ runtime has changed from libstdc++ to
+libc++. Not following these directions may lead to not being able to
+link the executable. If you already have macports installed and have
+installed packages this may require rebuilting all previous installed
+ports. Consider changing just the CFLAGS inside the Makefile below
+before making changes to your macports.conf file.
+
+### Configure macports.conf
+
+    vi /opt/local/etc/macports/macports.conf
+    # Add this to the end
+    buildfromsource always
+    cxx_stdlib libc++
+    configure.cppflags-append "-stdlib=libc++"
+    configure.cxxflags-append "-stdlib=libc++"
+    configure.ldflags-append "-stdlib=libc++"
+
+### Install dependencies
+
+Installing the dependencies using MacPorts is very straightforward.
+
+    sudo port install boost db48@+no_java openssl miniupnpc
+
+### Building `gabencoind`
+
+1. Clone the github tree to get the source code and go into the directory.
+
+        git clone git@github.com:gabencoin-project/gabencoin.git gabencoin
+        cd gabencoin
+
+2.  Build gabencoind:
+
+        cd src
+        cp makefile.osx Makefile
+        vi Makefile
+        # Change the line CFLAGS += -stdlib=libstdc++
+        # to CFLAGS += -stdlib=libc++
+        make
+
+3.  It is a good idea to build and run the unit tests, too:
+
+        make test
 
 Instructions: HomeBrew
 ----------------------

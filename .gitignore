@@ -1,0 +1,7 @@
+build/*
+Gabencoin-Qt.app/*
+Makefile
+qrc_bitcoin.cpp
+src/gabencoind
+src/qt/locale/*.qm
+src/test_gabencoin
